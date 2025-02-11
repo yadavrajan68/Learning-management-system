@@ -1,7 +1,7 @@
 import React from 'react';
 import { assets } from '../assets/assets';
 import Footer from '../components/student/Footer';
-import Loading from '../components/student/Loading';
+
 
 const AboutUs = () => {
     const teamMembers = [
