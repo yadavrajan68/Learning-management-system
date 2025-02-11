@@ -12,13 +12,13 @@ const Footer = () => {
       <p className='py-4 text-center text-xs md:text-sm text-gray-500'>Copyright 2024 © Learning Management System. All Right Reserved.</p>
      </div>
      <div className='flex items-center gap-3 max-md:mt-4'> 
-      <a href='#'>
+        <a href='https://www.facebook.com/login.php/'>
           <img src={assets.facebook_icon} alt="facebook_icon" />
       </a>
-      <a href='#'>
+        <a href='https://x.com/i/flow/login'>
           <img src={assets.twitter_icon} alt="twitter_icon" />
       </a>
-      <a href='#'>
+        <a href='https://www.instagram.com/accounts/login/'>
           <img src={assets.instagram_icon} alt="instagram_icon" />
       </a>
      </div>
