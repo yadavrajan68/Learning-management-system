@@ -1,6 +1,7 @@
 import React from 'react'
 import { assets } from '../../assets/assets'
 
+
 const Footer = () => {
   return (
     <footer className='bg-gray-900 md:px-36 text-left w-full mt-10'>
@@ -8,16 +9,17 @@ const Footer = () => {
       md:px-0 justify-center gap-10 md:gap-32 py-10 border-b border-white/30'>
           <div className='flex flex-col md:items-start items-center w-full'>
             <img src={assets.logo_dark} alt="logo" />
-            <p className='mt-6 text-center md:text-left text-sm text-white/80'> Lorem ipsum dolor sit amet consectetur adipisicing elit. 
-              ullam exercitationem adipisci quia temporibus culpa in. Quod!</p>
+          <p className='mt-6 text-center md:text-left text-sm text-white/80'> Edemy transforms education into a 
+          lifelong journey of growth and success. 
+          Join Edemy today and take the first step toward your brighter future!</p>
           </div>
           <div className='flex flex-col md:items-start items-center w-full'>
             <h2 className='font-semibold text-white mb-5'>Comapany</h2>
             <ul className='flex md:flex-col w-full justify-between text-sm text-white/80 md:space-y-2'>
-              <li> <a href="#">Home</a></li>
-              <li> <a href="#">About us</a></li>
-              <li> <a href="#">Contact us</a></li>
-              <li> <a href="#">Privacy Policy</a></li>
+              <li> <a href="/">Home</a></li>
+              <li> <a href="/about-us">About us</a></li>
+              <li> <a href="/contact-us">Contact us</a></li>
+              <li> <a href="/privacy-policy">Privacy Policy</a></li>
             
             </ul>
           </div>
