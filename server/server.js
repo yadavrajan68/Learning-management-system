@@ -14,7 +14,7 @@ async function initializeDB() {
     await connectDB();
     console.log("✅ MongoDB Connected");
   } catch (err) {
-    console.error(" MongoDB Connection Error:", err);
+    console.error("❌ MongoDB Connection Error:", err);
   }
 }
 initializeDB();
