@@ -9,15 +9,7 @@ import { clerkWebhooks } from './controllers/webhooks.js'
 const app = express();
 
 // DB Config
-async function initializeDB() {
-  try {
-    await connectDB();
-    console.log("✅ MongoDB Connected");
-  } catch (err) {
-    console.error(" MongoDB Connection Error:", err);
-  }
-}
-initializeDB();
+await connectDB()
 
 // Middlewares
 app.use(cors());
