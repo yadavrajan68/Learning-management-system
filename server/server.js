@@ -6,13 +6,21 @@ import connectDB from './configs/mongodb.js'
 import { clerkWebhooks } from './controllers/webhooks.js'
 
 // App Config
-const app = express()
+const app = express();
 
 // DB Config
-await connectDB()
+async function initializeDB() {
+  try {
+    await connectDB();
+    console.log("✅ MongoDB Connected");
+  } catch (err) {
+    console.error(" MongoDB Connection Error:", err);
+  }
+}
+initializeDB();
 
 // Middlewares
-app.use(cors())
+app.use(cors());
 
 // Routes
 app.get('/', (req, res)=> res.send("API Working"))
@@ -24,3 +32,5 @@ const PORT = process.env.PORT || 5000
 app.listen(PORT, () => {
     console.log(`Server is runninng on port ${PORT}`)
 })
+
+export default app;
