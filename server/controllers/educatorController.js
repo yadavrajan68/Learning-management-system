@@ -1,6 +1,7 @@
 import { clerkClient } from '@clerk/express';
 import Course from '../models/Course.js';
 import {v2 as cloudinary} from 'cloudinary';    
+import { Purchase } from '../models/purchase.js';
 
 // update role to educator
 export const updateRoleToEducator = async (req, res) => {
@@ -70,7 +71,11 @@ export const educatorDashboardData = async (req, res) =>{
             courseId: {$in: courseIds},
             status: 'completed'
         });
-        const totalEarning = purchases.reduce((sum, purchase) => sum + item.amount, 0);
+        const totalEarning = purchases.reduce(
+          (sum, purchase) => sum + purchase.amount,
+          0
+        );
+
 
             // Colllect unique enrolled students
 
@@ -82,7 +87,7 @@ export const educatorDashboardData = async (req, res) =>{
 
                 students.forEach(student => {
                     enrolledStudentsData.push({
-                        coursetitle: course.coursetitle,
+                        coursetitle: course.courseTitle,
                         student
                     });
                 });
@@ -106,7 +111,7 @@ export const getEnrolledStudentsData = async (req, res) =>{
         const purchases = await Purchase.find({
             courseId: {$in: courseIds},
             status: 'completed'
-        }).populate('userId', 'name imageUrl ').populate('courseId', 'coursetitle');
+        }).populate('userId', 'name imageUrl ').populate('courseId', 'courseTitle');
 
 
         const enrolledStudents= purchases.map(purchase => ({
