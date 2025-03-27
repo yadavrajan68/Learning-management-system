@@ -106,7 +106,6 @@ export const clerkWebhooks = async (req, res) => {
           });
 
           const { purchaseId } = session.data[0].metadata;
-
           const purchaseData = await Purchase.findById(purchaseId);
             purchaseData.status = "failed";
             await purchaseData.save();

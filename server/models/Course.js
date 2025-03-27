@@ -11,14 +11,14 @@ const lectureSchema = new mongoose.Schema(
       required: true,
     },
     lectureDuration: {
-      type: String,
+      type: Number,
       required: true,
     },
     lectureUrl: {
       type: String,
       required: true,
     },
-    isPreview: {
+    isPreviewFree: {
       type: Boolean,
       required: true,
     },

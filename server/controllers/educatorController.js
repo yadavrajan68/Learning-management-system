@@ -71,7 +71,7 @@ export const educatorDashboardData = async (req, res) =>{
             courseId: {$in: courseIds},
             status: 'completed'
         });
-        const totalEarning = purchases.reduce(
+        const totalEarnings = purchases.reduce(
           (sum, purchase) => sum + purchase.amount,
           0
         );
@@ -93,8 +93,10 @@ export const educatorDashboardData = async (req, res) =>{
                 });
             }
 
-        res.json({success: true, 
-            dashboardData:{totalEarning, totalStudents, totalCourses: courses.length}});
+        res.json({
+          success: true,
+          dashboardData: { totalEarnings, enrolledStudentsData, totalCourses},
+        });
 
     }catch(error){
         res.json({success: false, message: error.message});
