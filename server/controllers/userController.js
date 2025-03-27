@@ -2,6 +2,8 @@ import Course from "../models/Course.js";
 import { Purchase } from "../models/purchase.js";
 import User from "../models/User.js";
 import Stripe from "stripe";
+import dotenv from "dotenv";
+dotenv.config();
 
 // get user data 
 
@@ -69,7 +71,7 @@ export const purchaseCourse = async (req, res) => {
 
         const currency = process.env.CURRENCY.toLowerCase()
 
-        // create line items to for stripe 
+        // create line items  for stripe 
 
         const line_items = [{
             price_data: {
