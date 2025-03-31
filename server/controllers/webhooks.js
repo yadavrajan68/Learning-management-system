@@ -76,14 +76,26 @@ export const stripeWebhooks = async (request, response) => {
       case "payment_intent.succeeded": {
         const paymentIntent = event.data.object;
 
-        // Ensure metadata exists
-        if (!paymentIntent.metadata || !paymentIntent.metadata.purchaseId) {
+        console.log(
+          "Received payment intent:",
+          JSON.stringify(paymentIntent, null, 2)
+        );
+
+        // Fetch the checkout session to get metadata
+        const sessions = await stripeInstance.checkout.sessions.list({
+          payment_intent: paymentIntent.id,
+        });
+
+        if (!sessions.data.length || !sessions.data[0].metadata.purchaseId) {
+          console.error("Metadata missing in checkout session:", sessions);
           return response
             .status(400)
-            .json({ error: "Purchase ID missing in metadata" });
+            .json({
+              error: "Purchase ID missing in checkout session metadata",
+            });
         }
 
-        const { purchaseId } = paymentIntent.metadata;
+        const { purchaseId } = sessions.data[0].metadata;
         const purchaseData = await Purchase.findById(purchaseId);
         if (!purchaseData) {
           return response.status(404).json({ error: "Purchase not found" });
@@ -115,13 +127,22 @@ export const stripeWebhooks = async (request, response) => {
       case "payment_intent.payment_failed": {
         const paymentIntent = event.data.object;
 
-        if (!paymentIntent.metadata || !paymentIntent.metadata.purchaseId) {
+        console.log("Payment failed for intent:", paymentIntent.id);
+
+        // Fetch the checkout session metadata
+        const sessions = await stripeInstance.checkout.sessions.list({
+          payment_intent: paymentIntent.id,
+        });
+
+        if (!sessions.data.length || !sessions.data[0].metadata.purchaseId) {
           return response
             .status(400)
-            .json({ error: "Purchase ID missing in metadata" });
+            .json({
+              error: "Purchase ID missing in checkout session metadata",
+            });
         }
 
-        const { purchaseId } = paymentIntent.metadata;
+        const { purchaseId } = sessions.data[0].metadata;
         const purchaseData = await Purchase.findById(purchaseId);
         if (!purchaseData) {
           return response.status(404).json({ error: "Purchase not found" });
